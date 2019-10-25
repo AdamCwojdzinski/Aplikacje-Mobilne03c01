@@ -6,22 +6,27 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 
+/* DONE: Zadeklaruj w aktywności implementację interfejsu ButtonPressListener
+   dostarczanego przez fragment MyFragmentMain */
+class MyMainActivity : AppCompatActivity(),
+        MyFragmentMain.ButtonPressListener {
 
-class MyMainActivity : AppCompatActivity()
-/* TODO: Zadeklaruj w aktywności implementację interfejsu ButtonPressListener
-   dostarczanego przez fragment MyFragmentMain */ {
+    override fun onButtonPressed(button: Int) {
+        replaceFragment(button)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_main)
-    }
+        setSupportActionBar(findViewById(R.id.my_toolbar))
 
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        /* TODO: Załaduj menu opcji z pliku definicji my_main.xml,
-           skorzystaj z poniższego kodu, w miejscu trzech kropek wstaw odwołanie do zasobu będącego definicją menu
-           menuInflater.inflate(..., menu); */
+        /* DONE: Załaduj menu opcji z pliku definicji my_main.xml,
+           skorzystaj z poniższego kodu, w miejscu trzech kropek wstaw odwołanie do zasobu będącego definicją menu */
+           menuInflater.inflate(R.menu.my_main, menu)
         return true
     }
 
@@ -42,19 +47,25 @@ class MyMainActivity : AppCompatActivity()
         val anotherFragment: Fragment
         val fm = supportFragmentManager
         val ft = fm.beginTransaction()
-        /* TODO: W zależności od wartości parametru index zamień składową układu aktywności o identyfikatorze
+        /* DONE: W zależności od wartości parametru index zamień składową układu aktywności o identyfikatorze
            R.id.myFragmentAnother na fragment związany z odpowiednią klasą.
         * */
         when (index) {
             1 -> {
+                val fragmentOne = MyFragmentOne()
+                ft.replace(R.id.myFragmentAnother, fragmentOne)
             }
             2 -> {
+                val fragmentTwo = MyFragmentTwo()
+                ft.replace(R.id.myFragmentAnother, fragmentTwo)
             }
             3 -> {
+                val fragmentThree = MyFragmentThree()
+                ft.replace(R.id.myFragmentAnother, fragmentThree)
             }
         }
         ft.commit()
     }
 
-    /* TODO: Zaimplementuj brakującą metodę interfejsu ButtonPressListener */
+    /* DONE: Zaimplementuj brakującą metodę interfejsu ButtonPressListener */
 }

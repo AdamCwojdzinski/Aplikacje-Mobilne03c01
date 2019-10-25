@@ -12,9 +12,9 @@ import android.widget.Button
 
 class MyFragmentMain : Fragment() {
 
-    internal var buttonOne: Button? = null
-    internal var buttonTwo: Button? = null
-    internal var buttonThree: Button? = null
+    //internal var buttonOne: Button? = null
+    //internal var buttonTwo: Button? = null
+    //internal var buttonThree: Button? = null
 
     internal var mListener: ButtonPressListener? = null
 
@@ -24,15 +24,17 @@ class MyFragmentMain : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_my_fragment_main, container, false);
+        val view = inflater.inflate(R.layout.fragment_my_fragment_main, container, false)
 
-        /* TODO: Przypisz do atrybutów klasy Button odpowiednie elementy z definicji rozkładu,
+        /* DONE: Przypisz do atrybutów klasy Button odpowiednie elementy z definicji rozkładu,
            która w powyższej instrukcji została załadowana. Skorzystaj z poniższego fragmentu kodu
            button = view.findViewById(identyfikator_przycisku) as Button
          */
+        val buttonOne = view.findViewById(R.id.button_one) as Button
+        val buttonTwo = view.findViewById(R.id.button_two) as Button
+        val buttonThree = view.findViewById(R.id.button_three) as Button
 
-
-        /* TODO: Przypisz do poszczególnych przycisków instancje odbiornika (listenera), który zareaguje
+        /* DONE: Przypisz do poszczególnych przycisków instancje odbiornika (listenera), który zareaguje
            na wybranie przycisku. Efekt powinien polegać na wywołaniu metody onButtonPressed
            w ramach obiektu przypisanego do atrybutu mListener.
            W zależności od przycisku przekaż do metody odpowiedni parametr (1,2,3).
@@ -40,21 +42,28 @@ class MyFragmentMain : Fragment() {
 
            button.setOnClickListener { . . . }
          */
-
-        return view;
+        buttonOne.setOnClickListener{
+            mListener?.onButtonPressed(1)
+        }
+        buttonTwo.setOnClickListener{
+            mListener?.onButtonPressed(2)
+        }
+        buttonThree.setOnClickListener{
+            mListener?.onButtonPressed(3)
+        }
+        return view
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        /* TODO: Usuń poniższy komentarz, aby do atrybutu mListener móc przypisać aktywność,
+        /* DONE: Usuń poniższy komentarz, aby do atrybutu mListener móc przypisać aktywność,
            która dołączyła bieżący fragment, weryfikując jednocześnie czy aktywność ta
            implementuje wymagany interfejs */
-        /*if (context is ButtonPressListener)
+        if (context is ButtonPressListener)
             mListener = context
         else
             throw ClassCastException("$context must implement ButtonPressListener interface")
-            */
     }
 
 
